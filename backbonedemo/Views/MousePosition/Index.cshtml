@@ -1,0 +1,81 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" />
+        <!--The viewport meta tag is used to improve the presentation and behavior of the samples
+        on iOS devices-->
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+        <title>Show Mouse Position</title>
+        <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.6/js/dojo/dijit/themes/claro/claro.css">        
+    </head>
+    <body class="claro">
+        <div id="map" style="width:900px; height:600px; border:1px solid #000;"></div>
+
+        <div id="coords" style="padding:5px; margin:5px; background-color:#eee;">&nbsp;</div>        
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        @Html.Script("lib/icanhaz.min.js")
+        @Html.Script("lib/underscore-min.js")
+        @Html.Script("lib/backbone-min.js")     
+        <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.6"></script>
+
+        <script type="text/javascript">
+            dojo.require('esri.map');
+
+            /* Map Model */
+            MapModel = Backbone.Model.extend({
+                initialize: function () {
+                    var initialExtent = new esri.geometry.Extent({ xmin: -12982292.126516413, ymin: 4001527.6187133053, xmax: -12963947.239727996, ymax :4009171.3215418123, spatialReference: { 'wkid': 102100} });
+                    this.map = new esri.Map('map', { extent: initialExtent });
+                    var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer');
+                    this.map.addLayer(tiledMapServiceLayer);
+
+                    dojo.connect(this.map, 'onMouseMove', dojo.hitch(this, this.updateMouseCoords));
+                    dojo.connect(this.map, 'onMouseDrag', dojo.hitch(this, this.updateMouseCoords));
+                    dojo.connect(this.map, 'onMouseOut', dojo.hitch(this, this.updateMouseCoords));
+                },                
+                updateMouseCoords: function (evt) {
+                    if ((evt.type) === 'mouseout') {
+                        this.unset('x', { silent: true });
+                        this.unset('y');
+                    } else if (evt.mapPoint) {
+                        this.set({ x: evt.mapPoint.x, y: evt.mapPoint.y });
+                    }
+                }
+            });            
+
+            /* MouseCoords View */
+            MouseCoordsView = Backbone.View.extend({
+                initialize: function (args) {
+                    this.template = ich['mousecoords-template'];
+                    this.model.bind('change', this.render, this);
+                },
+                el: '#coords',
+                render: function () {
+                    var content = this.template(this.model.toJSON(), true);
+                    $(this.el).html(content);
+
+                    return this;
+                }
+            });
+
+            dojo.addOnLoad(function () { 
+                var model = new MapModel();
+                var view = new MouseCoordsView({ model: model });
+            });
+        </script>
+
+        @* mustache/ icanhaz templating *@    
+        <script type="text/html" id="mousecoords-template">
+            {{#x}}
+                {{x}}, {{y}}
+            {{/x}}
+            &nbsp;
+        </script>
+    </body>
+</html>

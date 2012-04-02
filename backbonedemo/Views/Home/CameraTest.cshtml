@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "CameraTest";
+}
+
+<h2>Camera Test</h2>
+
+@using (Html.BeginForm("CameraTest", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+	<input type="file" accept="image/*" capture="camera" id="pics" name="pics" />
+    <input type="submit" />	 
+}
+
+
+@if (ViewBag.ImageName != null)
+{
+    <img src="@Url.Content("~/public/uploads/" + (string)ViewBag.ImageName)" />    
+}

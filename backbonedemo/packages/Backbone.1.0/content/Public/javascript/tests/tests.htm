@@ -1,0 +1,71 @@
+﻿<html>
+<head>
+    <title>Tests</title>
+    <link rel="stylesheet" href="../lib/testing/qunit.css" type="text/css" media="screen" />
+    <style type="text/css">
+    
+        #qunit-testresult
+        {
+        	font-weight:600;
+        	font-size:1.2em;
+        }        	
+    
+    </style>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript" ></script>
+    <script type="text/javascript" src="../lib/testing/qunit.js"></script> 
+    <script src="../lib/testing/sinon.js" type="text/javascript"></script>
+    <script src="../lib/testing/sinon-qunit.js" type="text/javascript"></script>
+
+    <script src="../lib/icanhaz.min.js" type="text/javascript"></script>
+    <script src="../lib/underscore.js" type="text/javascript"></script>
+    <script src="../lib/backbone-min.js" type="text/javascript"></script>
+    <script src="../lib/backbone.modelbinding.min.js" type="text/javascript"></script>
+    <script src="../lib/json2.js" type="text/javascript"></script>
+    
+    <!-- load scripts to test here -->  
+
+    <script type="text/javascript">
+        $(function () {
+            //setup the whole thing            
+            var app = new dts.Router({});
+            Backbone.history.start();
+
+            //setup each test
+            function setup() {
+                //alert('setup');
+            }
+
+            //teardown each test
+            function teardown() {
+                //alert('teardown');
+            }
+
+            module('My Tests', { setup: setup, teardown: teardown });
+
+            test('Instantiate SearchFoo', function () {
+                ok(app, 'app exists');
+            });
+
+            //test('index route', function () {
+                //var spy = this.spy();
+
+                //app.bind('route:index', spy);
+                //app.navigate('', true);
+
+                //ok(spy.calledOnce, 'index was called');
+                //ok(spy.calledWith());
+            //});                              
+
+            //tests don't run in ie unless start is called!
+            /////////start();
+        });
+    </script>
+</head>
+<body>        
+    <h1 id="qunit-header">Tests</h1>  
+    <h2 id="qunit-banner"></h2>  
+    <h2 id="qunit-userAgent"></h2>  
+    <ol id="qunit-tests"></ol>     
+</body>
+</html>

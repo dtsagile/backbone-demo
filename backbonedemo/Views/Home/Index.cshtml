@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<style type="text/css">
+    body {width:100%; font-size: 120%;}
+    div {width:600px;margin: 0 auto 0 auto;}
+    a {display:block; margin-top: 15px; color: blue;}
+</style>
+
+<div>
+
+    <h1>Backbone.js demos</h1>
+
+    <a href="http://help.arcgis.com/en/webapi/javascript/arcgis/demos/map/map_currentextent.html">Esri Show Map Extent Sample</a>
+
+    @Html.ActionLink("Backbone Show Map Extent", "Index", "MapExtent")
+
+   @* <a href="http://help.arcgis.com/en/webapi/javascript/arcgis/demos/map/map_xycoords.html">Esri Show Mouse Coordinates Sample</a>
+
+    @Html.ActionLink("Backbone Show Mouse Coordinates", "Index", "MousePosition")*@
+
+    @Html.ActionLink("Awesomer!", "Index", "Better")
+
+    @Html.ActionLink("A more realistic scenario", "Index", "SearchApp")
+    
+    <a href="@Url.Content("~/public/javascript/tests/tests.htm")">Tests!</a>
+
+</div>

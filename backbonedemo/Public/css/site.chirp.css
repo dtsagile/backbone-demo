@@ -1,0 +1,63 @@
+﻿body
+{
+	background-color: #3C494F;	
+}
+h1
+{
+	color: White;
+	font-size: 2em;
+}
+h2
+{
+	color: white;
+	margin-bottom: 5px;
+}
+#main
+{
+	width: 960px;
+	margin: 20px auto;
+}
+
+#map
+{
+	width: 100%;
+	height: 400px;
+	border solid 1px #444444;
+	position:relative;
+	border:solid 2px #61A4D1;
+}
+
+#map-search
+{
+	position:absolute;
+	top: 10px;
+	right: 15px;
+	z-index: 2;
+}
+
+table.results-table
+{
+	background-color:White;
+	color: black;
+	border: solid 2px #61A4D1;
+	width: 100%;
+	border-collapse: collapse;
+}
+table.results-table tbody tr:nth-child(even), table.results-table thead tr
+{
+	background-color: #DDDDDD;
+}
+table.results-table td
+{
+	padding:3px;
+}
+
+table.results-table tr.active td
+{
+	font-weight: bold;	
+}
+
+table.results-table td, table.results-table th
+{
+	border:solid 2px #61A4D1;
+}

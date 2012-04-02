@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Backbone Demo";
+}
+
+@section css{
+    <link href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.6/js/dojo/dijit/themes/claro/claro.css" rel="stylesheet" type="text/css" />
+    @Html.CSS("site.min.css")
+}
+
+    <header><h1>Backbone.js Demo</h1></header>
+    <div id="map" class="claro"><button id="map-search">Search</button></div>
+    <div id="results"></div>
+
+@section js{    
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.7"></script>
+    @Html.Script("lib/icanhaz.min.js")
+    @Html.Script("lib/underscore-1.3.1.min.js")
+    @Html.Script("lib/backbone-0.9.1.min.js")    
+    @Html.Script("lib/json2.min.js")    
+
+    @Html.Script("src/mapmodel.js")      
+    @Html.Script("src/resultitem.js")
+    @Html.Script("src/resultscollection.js")
+    @Html.Script("src/resultsview.js")      
+
+    <script>
+        dojo.require('esri.map');
+        dojo.require('esri.toolbars.draw');
+        dojo.require('esri.layers.FeatureLayer');
+
+        dojo.addOnLoad(function () {
+            var model = new bbd.MapModel();
+
+            var resultsCollection = new bbd.ResultsCollection({
+                mapModel: model,
+                url: 'http://services.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Population_by_Sex/MapServer/1'
+            });
+            var view = new bbd.ResultsView({
+                collection: resultsCollection,
+                container: '#results',
+                title: 'Census Block Groups',
+                mapModel: model
+            });
+        });
+    </script>
+
+    @* mustache/ icanhaz templating *@    
+    <script type="text/html" id="results-set-template">        
+        <h2 class="results-heading">{{title}}</h2>
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>Total Population</th>
+                    <th>Males</th>
+                    <th>Females</th>
+                </tr>
+            </thead>
+            <tbody>        
+            </tbody>
+        </table>
+    </script>
+    
+    <script type="text/html" id="result-item-template1">
+        <td>
+            {{TOTPOP_CY}}
+        </td>
+        <td>
+            {{MALES_CY}}
+        </td>
+        <td>
+            {{FEMALES_CY}}
+        </td>
+    </script>
+}

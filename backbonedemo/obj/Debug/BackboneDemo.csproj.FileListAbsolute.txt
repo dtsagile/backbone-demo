@@ -1,0 +1,13 @@
+D:\SVN\BackboneDemo\obj\Debug\ResolveAssemblyReference.cache
+D:\SVN\BackboneDemo\bin\BackboneDemo.dll
+D:\SVN\BackboneDemo\bin\BackboneDemo.pdb
+D:\SVN\BackboneDemo\bin\Autofac.Configuration.dll
+D:\SVN\BackboneDemo\bin\Autofac.dll
+D:\SVN\BackboneDemo\bin\Autofac.Integration.Mvc.dll
+D:\SVN\BackboneDemo\bin\EntityFramework.dll
+D:\SVN\BackboneDemo\bin\NLog.dll
+D:\SVN\BackboneDemo\bin\Autofac.xml
+D:\SVN\BackboneDemo\bin\EntityFramework.xml
+D:\SVN\BackboneDemo\bin\NLog.xml
+D:\SVN\BackboneDemo\obj\Debug\BackboneDemo.dll
+D:\SVN\BackboneDemo\obj\Debug\BackboneDemo.pdb
